@@ -19,7 +19,7 @@ docker-compose up -d --build
 docker-compose exec web python manage.py createsuperuser
 ```
 
-### 3 step
+### 4 step
 Заполнение базы данных
 ```bash
 docker-compose exec web sh
@@ -34,5 +34,5 @@ docker-compose exec web sh
 3. `cat sqlite_to_postgres.log`
 
 
-### 4 step
+### 5 step
 Можно переходить [http://localhost/admin/](http://localhost/admin/)
