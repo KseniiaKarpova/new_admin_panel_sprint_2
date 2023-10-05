@@ -1,5 +1,7 @@
-#Idea
-*.idea/
+# IntellijIdea files
+*.iml
+.idea
+out
 # Environments
 .env
 .venv
