@@ -7,7 +7,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 class TimeStampedMixin(models.Model):
 
     created = models.DateTimeField(_('created'), auto_now_add=True)
-    modified = models.DateTimeField(_('modified'),auto_now=True)
+    modified = models.DateTimeField(_('modified'), auto_now=True)
 
     class Meta:
         abstract = True
@@ -117,7 +117,8 @@ class Filmwork(UUIDMixin, TimeStampedMixin):
     class Meta:
         db_table = "content\".\"film_work"
         indexes = [
-            models.Index(fields=['creation_date'], name='film_work_creation_date_idx'),
+            models.Index(fields=['creation_date'],
+                         name='film_work_creation_date_idx'),
         ]
         # название модели в интерфейсе
         verbose_name = 'Кинопроизведение'

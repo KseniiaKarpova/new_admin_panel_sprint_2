@@ -1,6 +1,5 @@
 from django.urls import path
 from movies.api.v1 import views
-from django.urls import include
 
 urlpatterns = [
     path('movies/', views.MoviesListApi.as_view()),

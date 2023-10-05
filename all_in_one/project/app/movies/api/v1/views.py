@@ -7,7 +7,7 @@ from django.views.generic.list import BaseListView
 from movies.models import Filmwork
 
 
-class  Role(Enum):
+class Role(Enum):
     ACTOR = 'actor'
     DIRECTOR = 'director'
     WRITER = 'writer'
@@ -17,32 +17,30 @@ class MoviesApiMixin:
     model = Filmwork
     http_method_names = ['get']
 
-
-
     def get_queryset(self):
         def filter_role_full_name(role):
             return ArrayAgg('persons__full_name',
                             distinct=True,
                             filter=Q(personfilmwork__role=role))
 
-        return Filmwork.objects \
-                        .prefetch_related('genres') \
-                        .prefetch_related('persons') \
-                        .values(
-                            'id',
-                            'title',
-                            'description',
-                            'creation_date',
-                            'rating',
-                            'type',
-                        ) \
-                        .annotate(
-                            genres=ArrayAgg('genres__name', distinct=True),
-                            actors=filter_role_full_name(Role.ACTOR.value),
-                            directors=filter_role_full_name(Role.DIRECTOR.value),
-                            writers=filter_role_full_name(Role.WRITER.value)
-                        )
-
+        return (Filmwork.objects.
+                prefetch_related('genres').
+                prefetch_related('persons').
+                values(
+                    'id',
+                    'title',
+                    'description',
+                    'creation_date',
+                    'rating',
+                    'type',
+                ).
+                annotate(
+                    genres=ArrayAgg('genres__name', distinct=True),
+                    actors=filter_role_full_name(Role.ACTOR.value),
+                    directors=filter_role_full_name(Role.DIRECTOR.value),
+                    writers=filter_role_full_name(Role.WRITER.value)
+                )
+                )
 
     def render_to_response(self, context, **response_kwargs):
         return JsonResponse(context)
