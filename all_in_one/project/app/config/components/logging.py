@@ -20,9 +20,14 @@ LOGGING = {
     },
     'loggers': {
         'django.db.backends': {
-            'level': 'DEBUG',
-            'handlers': ['debug-console'],
+            'level': 'ERROR',
+            'handlers': ['mail_admins'],
             'propagate': False,
-        }
+        },
+        "django.request": {
+            "handlers": ["mail_admins"],
+            "level": "ERROR",
+            "propagate": False,
+        },
     },
 }
