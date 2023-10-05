@@ -4,9 +4,9 @@ import os
 import psycopg2
 from psycopg2.extensions import connection as _connection
 from dotenv import load_dotenv
-from data import tables
-from Logger import logger
-from data_execution import PostgresSaver, SQLiteExtractor
+from api.sqlite_to_postgres.data import tables
+from api.sqlite_to_postgres.logger import logger
+from api.sqlite_to_postgres.data_execution import PostgresSaver, SQLiteExtractor
 import gc
 
 load_dotenv()
@@ -70,9 +70,9 @@ def load_from_sqlite(connection: sqlite3.Connection,
         logger.exception(e)
 
 
-if __name__ == '__main__':
+def run():
     # Данные для подключения к БД
-    db_path = 'db.sqlite'
+    db_path = 'api/sqlite_to_postgres/db.sqlite'
 
     dsn = {
         'dbname': os.environ.get('DB_NAME'),

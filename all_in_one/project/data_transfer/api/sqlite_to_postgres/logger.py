@@ -2,7 +2,7 @@ import logging
 from logging.handlers import RotatingFileHandler
 
 # Set up logging
-log_file = './sqlite_to_postgres.log'
+log_file = 'sqlite_to_postgres.log'
 max_file_size = 1024 * 1024  # 1 MB
 backup_count = 5
 

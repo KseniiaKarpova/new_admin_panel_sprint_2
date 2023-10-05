@@ -16,6 +16,18 @@ services:
     restart: always
 
 
+  data_transfer:
+    build:
+      context: ./data_transfer
+      dockerfile: Dockerfile
+    container_name: data_transfer
+    ports:
+      - "8888:8888"
+    env_file:
+      - .env
+    restart: always
+
+
   web:
     build:
       context: ./app

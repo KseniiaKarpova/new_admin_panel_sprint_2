@@ -1,7 +1,7 @@
 from typing import List
 from psycopg2.extras import execute_batch
 from dataclasses import fields, astuple
-from Logger import logger
+from api.sqlite_to_postgres.logger import logger
 
 
 class SqlExecuter:
@@ -15,7 +15,7 @@ class SqlExecuter:
             colums_name = [field.name for field in fields(datatype)]
 
             curs = self.connect.cursor()
-            curs.execute(f"SELECT {', '.join(colums_name)} FROM {table_name} where id like '%{i}';")
+            curs.execute(f"SELECT {', '.join(colums_name)} FROM {table_name}  WHERE id LIKE '%{i}';")
 
             # сохранение полученных записей в тип датакласса
             result = []

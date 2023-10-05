@@ -21,18 +21,15 @@ docker-compose exec web python manage.py createsuperuser
 
 ### 4 step
 Заполнение базы данных
-```bash
-docker-compose exec web sh
-```
-в терминале контейнера запустить: 
 
-1. `cd sqlite_to_postgres`
-
-2. `python3 load_data.py`
-
-Проверить:
-3. `cat sqlite_to_postgres.log`
-
+Перейти на [http://0.0.0.0:8888/docs](http://0.0.0.0:8888/docs) и запустить `GET/migrate`
 
 ### 5 step
+Проверка загрузки данных:
+```bash
+docker exec data_transfer cat sqlite_to_postgres.log
+```
+
+
+### 6 step
 Можно переходить [http://localhost/admin/](http://localhost/admin/)
