@@ -1,5 +1,5 @@
 #Idea
-.idea/
+*.idea/
 # Environments
 .env
 .venv
